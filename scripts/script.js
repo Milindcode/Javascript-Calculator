@@ -53,13 +53,16 @@ operators.forEach((op)=>{
                 operand1= result();
                 operand2= "";  
                 operator = op.id;
+                lrg_display.textContent+= op.id;
+                sml_display.textContent=result();
             }
 
             else if(operator == ""){
                 operator = op.id;
+                lrg_display.textContent+= op.id;
+                sml_display.textContent=result();
             }
-            lrg_display.textContent+= op.id;
-            sml_display.textContent=result();
+            
         }
     })
 })
@@ -98,6 +101,10 @@ equal_btn.addEventListener('click', ()=>{
     let temp = lrg_display.textContent;
     lrg_display.textContent= sml_display.textContent;
     sml_display.textContent= temp;
+
+    if(lrg_display.textContent===""){
+        lrg_display.textContent= sml_display.textContent;
+    }
 
     operand1="";
     operand2="";
