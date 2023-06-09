@@ -12,7 +12,7 @@ let operand1, operand2, operator;
 operand1=operand2=operator="";
 
 let decCount=0, dec= false, count=0;
-
+let op1Dec = 0 , op2Dec= 0;
 
 digits.forEach((digit) =>{
     digit.addEventListener('click', ()=>{
@@ -72,11 +72,20 @@ decimal.addEventListener('click', ()=>{
     }
 
     
-    if(operator!='') operand2+='.';
-    else operand1+='.';
-    dec= true;
-    lrg_display.textContent+= '.';
-    sml_display.textContent=result();
+    if(operator!='' && op2Dec===0){
+        operand2+='.'; 
+        op2Dec=1;
+        dec= true;
+        lrg_display.textContent+= '.';
+        sml_display.textContent=result();
+    }
+    else if(op1Dec ===0) {
+        operand1+='.'; 
+        op1Dec=1;
+        dec= true;
+        lrg_display.textContent+= '.';
+        sml_display.textContent=result();
+    }
 })
 
 ac_btn.addEventListener(('click'), ()=>{
