@@ -44,17 +44,23 @@ operators.forEach((op)=>{
         decCount= count;
         count=0;
 
-        if(operator!= "" && operand2!= ""){
-            operand1= result();
-            operand2= "";  
-            operator = op.id;
+        if(operand1===""){
+            sml_display.textContent= "Type operand first!!";
+            lrg_display.textContent="";
         }
+        else{
+            if(operator!= "" && operand2!= ""){
+                operand1= result();
+                operand2= "";  
+                operator = op.id;
+            }
 
-        else if(operator == ""){
-            operator = op.id;
+            else if(operator == ""){
+                operator = op.id;
+            }
+            lrg_display.textContent+= op.id;
+            sml_display.textContent=result();
         }
-        lrg_display.textContent+= op.id;
-        sml_display.textContent=result();
     })
 })
 
@@ -90,6 +96,7 @@ equal_btn.addEventListener('click', ()=>{
 })
 
 delete_btn.addEventListener('click', () =>{
+    let flag= 1;
     if(operator === "" && operand1 != ""){
         operand1 = operand1.slice(0, operand1.length -1);
     }
@@ -99,11 +106,11 @@ delete_btn.addEventListener('click', () =>{
     else if(operand2!= ""){
         operand2 = operand2.slice(0, operand2.length -1);
         console.log(operand2);
+        if(operand2==="") flag=0;
     }
 
     lrg_display.textContent = lrg_display.textContent.slice(0, lrg_display.textContent.length -1);
-
-    sml_display.textContent= result();
+    sml_display.textContent= flag===1 ? result() : operand1;
 });
 
 
@@ -120,7 +127,7 @@ const result= () =>{
             return (parseFloat(operand1)*parseFloat(operand2)).toFixed(decCount);
 
         case '/':
-            if(parseFloat(operand2) != 0) return (parseFloat(operand1)/parseFloat(operand2)).toFixed(decCount);
+            if(parseFloat(operand2) != 0) return (parseFloat(operand1)/parseFloat(operand2));
             else return "Error: Division by 0";
         default:
             return "";
